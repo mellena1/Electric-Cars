@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electicCars.WindowController">
+   <children>
+      <Pane prefHeight="396.0" prefWidth="516.0">
+         <children>
+            <ScatterChart id="graph" layoutX="-14.0" prefHeight="410.0" prefWidth="529.0" title="Battery Percentages Over Time">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis autoRanging="false" label="Battery Percentage" minorTickCount="2" prefHeight="360.0" prefWidth="46.0" side="LEFT" tickUnit="10.0" />
+              </yAxis>
+            </ScatterChart>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
