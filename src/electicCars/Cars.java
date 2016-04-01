@@ -1,6 +1,7 @@
 package electicCars;
 
 public abstract class Cars {
+	//TODO: Add array of names of cars
 	
 	public Cars() {}
 	
