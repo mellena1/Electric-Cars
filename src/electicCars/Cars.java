@@ -2,10 +2,9 @@ package electicCars;
 
 public abstract class Cars {
 	
-	public Cars() {}
+	public abstract Integer milesLeft(Integer powerLeft);
 	
-	public abstract void milesLeft();
+	public abstract Integer chargeTime(Integer powerLeft);
 	
-	public abstract void chargeTime();
-
+	public abstract Integer GetCost();
 }
