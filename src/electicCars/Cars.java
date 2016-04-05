@@ -3,7 +3,7 @@ package electicCars;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Cars {
+public abstract class Cars implements Graphable {
 	//TODO: Add array of names of cars
 	
 	public static final ArrayList<String> carNames = new ArrayList<String>(

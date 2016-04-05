@@ -36,9 +36,17 @@ public class ChevroletBolt extends electicCars.Cars implements electicCars.Graph
 	}
 
 	@Override
-	public void getData(int index) {
-		// TODO Auto-generated method stub
-		
+	public Integer getData(int index) {
+		return chargeData.get(index);
 	}
 
+	@Override
+	public int getChargeSize() {
+		return chargeData.size();
+	}
+
+	@Override
+	public ArrayList<Integer> getChargeList() {
+		return chargeData;
+	}
 }

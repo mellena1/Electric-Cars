@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -31,7 +32,7 @@ public class WindowController {
 	@FXML ProgressBar batteryProgBar;
 	@FXML Button viewGraphBtn;
 	//graphWindow
-	@FXML ScatterChart<Integer, Double> graph;
+	@FXML ScatterChart<Integer, Integer> graph;
 	//Cars List
 	private ArrayList<Cars> carList = new ArrayList<Cars>(Arrays.asList(new carData.BMWi3(), 
 					new carData.ChevroletBolt(), new carData.ChevroletSparkEV(), new carData.Fiat500e(), 
@@ -48,6 +49,7 @@ public class WindowController {
 		try {
 			AnchorPane root = FXMLLoader.load(getClass().getResource("graphWindow.fxml"));
 			Stage stage = new Stage();
+			addDataPointsToGraph();
 			stage.setTitle("Graph");
 			stage.setScene(new Scene(root));
 			stage.show();
@@ -83,15 +85,20 @@ public class WindowController {
 		batteryProgBar.setProgress(batteryPercent/100.0);
 	}
 	
-	//TODO: Add in the calculation method, Helper Method for enter button, 
+	//Add in the calculation method, Helper Method for enter button, 
 	private void updateLabels(){
 		remainingMilesLbl.setText(selectedCar.milesLeft((int)batteryPercent) + " miles");
 		timeToChargeLbl.setText(selectedCar.chargeTime((int)batteryPercent) + " minutes");
 	}
 	
-	//TODO: Helper method for Open Graph button, adds data to the graph
+	//Helper method for Open Graph button, adds data to the graph
 	private void addDataPointsToGraph(){
-		
+		XYChart.Series<Integer, Integer> series = new XYChart.Series<Integer, Integer>();
+		ArrayList<Integer> dataFromCar = selectedCar.getChargeList();
+		for(int x = 0; x < dataFromCar.size(); x++){
+			series.getData().set(x, new XYChart.Data<>(x, dataFromCar.get(x)));
+		}
+		graph.getData().add(series);
 	}
 	
 	
