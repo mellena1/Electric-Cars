@@ -56,6 +56,11 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	@Override
 	public Integer GetCost() {
 		return cost;
+	}
+
+	@Override
+	public ArrayList<Integer> getChargeList() {
+		return chargeData;
 	}	
 
 }
