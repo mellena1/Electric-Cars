@@ -59,16 +59,6 @@ public class KiaSoulEV extends electicCars.Cars implements electicCars.Graphable
 	}
 
 	@Override
-	public Integer getData(int index) {
-		return chargeData.get(index);
-	}
-
-	@Override
-	public int getChargeSize() {
-		return chargeData.size();
-	}
-
-	@Override
 	public ArrayList<Integer> getChargeList() {
 		return chargeData;
 	}
