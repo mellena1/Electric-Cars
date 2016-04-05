@@ -41,8 +41,9 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 				chargeData.add(Integer.parseInt(sc.nextLine()));
 			}
 		} catch (Exception e) {}
-	}
 
+	}
+	
 	@Override
 	public Integer milesLeft(Integer powerLeft) {
 		return (int)(milesPerCharge*(powerLeft/100.0));
@@ -57,5 +58,20 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	public Integer GetCost() {
 		return cost;
 	}	
+
+	@Override
+	public Integer getData(int index) {
+		return chargeData.get(index);
+	}
+
+	@Override
+	public int getChargeSize() {
+		return chargeData.size();
+	}
+
+	@Override
+	public ArrayList<Integer> getChargeList() {
+		return chargeData;
+	}
 
 }

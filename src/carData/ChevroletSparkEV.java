@@ -58,4 +58,18 @@ public class ChevroletSparkEV extends electicCars.Cars implements electicCars.Gr
 		return cost;
 	}
 
+	@Override
+	public Integer getData(int index) {
+		return chargeData.get(index);
+	}
+
+	@Override
+	public int getChargeSize() {
+		return chargeData.size();
+	}
+
+	@Override
+	public ArrayList<Integer> getChargeList() {
+		return chargeData;
+	}
 }

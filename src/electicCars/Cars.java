@@ -1,13 +1,17 @@
 package electicCars;
 
-public abstract class Cars {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public abstract class Cars implements Graphable {
+	//TODO: Add array of names of cars
 	
-	String[] carNames = new String[] 
-			{"BMWi3","ChevroletBolt","ChevroletSparkEV",
-			"Fiat500e","FordFocusElectric","KiaSoulEV",
-			"MercedesBClassElectricDrive","MitsubishiiMiEV","NissanLeaf",
-			"SmartElectricDrive","TeslaModel3","TeslaModelS",
-			"TeslaModelX","VolkswagenEGolf"};
+	public static final ArrayList<String> carNames = new ArrayList<String>(
+			Arrays.asList("BMW i3","Chevrolet Bolt","Chevrolet Spark EV",
+			"Fiat 500e","Ford Focus Electric","Kia Soul EV",
+			"Mercedes B Class Electric Drive","Mitsubishii MiEV","Nissan Leaf",
+			"Smart Electric Drive","Tesla Model 3","Tesla Model S",
+			"Tesla Model X","Volkswagen E Golf"));
 	
 	public abstract Integer milesLeft(Integer powerLeft);
 	

@@ -58,4 +58,19 @@ public class VolkswagenEGolf extends electicCars.Cars implements electicCars.Gra
 		return cost;
 	}
 
+	@Override
+	public Integer getData(int index) {
+		return chargeData.get(index);
+	}
+
+	@Override
+	public int getChargeSize() {
+		return chargeData.size();
+	}
+	
+	@Override
+	public ArrayList<Integer> getChargeList() {
+		return chargeData;
+	}
+
 }
