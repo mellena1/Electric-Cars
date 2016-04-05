@@ -1,6 +1,9 @@
 package carData;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 
@@ -13,11 +16,31 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	
 	//In minutes
 	private final Integer chargeTime = 200;
-
+	
+	public BMWi3() {
+		loadData();
+	}
+	
 	@Override
 	public void storeData(Integer powerLeft) {
 		chargeData.add(powerLeft);
-		//TODO some code to update the graph
+		
+		try (PrintWriter pw = new PrintWriter(new File("BMWi3.txt"))) {
+			for (int i = 0; i < chargeData.size(); i++) {
+				pw.write(chargeData.get(i) + "%n");
+			}
+		} catch (Exception ex) {
+			System.out.println("A fatal error has occured.");
+		}
+	}
+	
+	@Override
+	public void loadData() {
+		try (Scanner sc = new Scanner(new File("BMWi3.txt"))) {
+			while (true) {
+				chargeData.add(Integer.parseInt(sc.nextLine()));
+			}
+		} catch (Exception e) {}
 	}
 
 	@Override
@@ -33,6 +56,6 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	@Override
 	public Integer GetCost() {
 		return cost;
-	}
+	}	
 
 }
