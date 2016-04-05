@@ -35,4 +35,10 @@ public class NissanLeaf extends electicCars.Cars implements electicCars.Graphabl
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -35,4 +35,10 @@ public class MercedesBClassElectricDrive extends electicCars.Cars implements ele
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

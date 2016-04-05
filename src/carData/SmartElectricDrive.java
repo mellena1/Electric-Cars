@@ -35,4 +35,10 @@ public class SmartElectricDrive extends electicCars.Cars implements electicCars.
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

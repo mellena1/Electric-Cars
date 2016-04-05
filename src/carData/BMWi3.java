@@ -17,9 +17,8 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	@Override
 	public void storeData(Integer powerLeft) {
 		chargeData.add(powerLeft);
-		//TODO some code to update the graph
 	}
-
+	
 	@Override
 	public Integer milesLeft(Integer powerLeft) {
 		return (int)(milesPerCharge*(powerLeft/100.0));
@@ -33,6 +32,12 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 	@Override
 	public Integer GetCost() {
 		return cost;
+	}
+
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

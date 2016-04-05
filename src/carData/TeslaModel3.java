@@ -36,4 +36,10 @@ public class TeslaModel3 extends electicCars.Cars implements electicCars.Graphab
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -35,4 +35,10 @@ public class Fiat500e extends electicCars.Cars implements electicCars.Graphable{
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

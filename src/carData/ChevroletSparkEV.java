@@ -35,4 +35,10 @@ public class ChevroletSparkEV extends electicCars.Cars implements electicCars.Gr
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

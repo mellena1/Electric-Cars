@@ -35,4 +35,10 @@ public class ChevroletBolt extends electicCars.Cars implements electicCars.Graph
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

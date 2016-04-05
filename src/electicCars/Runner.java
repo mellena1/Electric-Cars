@@ -12,11 +12,15 @@ public class Runner extends Application {
 	//Open the window
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainWindow.fxml")); //get from FXML file
+			AnchorPane root = loader.load(); //Load AnchorPane
+			WindowController controller = loader.getController();
+			controller.populateComboBox(); //Add all car names to combo box
 			Scene scene = new Scene(root);
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -35,4 +35,10 @@ public class FordFocusElectric extends electicCars.Cars implements electicCars.G
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

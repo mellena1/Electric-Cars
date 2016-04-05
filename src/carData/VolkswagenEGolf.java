@@ -35,4 +35,10 @@ public class VolkswagenEGolf extends electicCars.Cars implements electicCars.Gra
 		return cost;
 	}
 
+	@Override
+	public void getData(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
