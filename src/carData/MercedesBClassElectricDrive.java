@@ -27,7 +27,7 @@ public class MercedesBClassElectricDrive extends electicCars.Cars implements ele
 		
 		try (PrintWriter pw = new PrintWriter(new File("MercedesBClassElectricDrive.txt"))) {
 			for (int i = 0; i < chargeData.size(); i++) {
-				pw.write(chargeData.get(i) + "%n");
+				pw.write(chargeData.get(i) + "\n");
 			}
 		} catch (Exception ex) {
 			System.out.println("A fatal error has occured.");

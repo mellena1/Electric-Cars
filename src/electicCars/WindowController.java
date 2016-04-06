@@ -1,10 +1,10 @@
 package electicCars;
 
-import java.io.IOException;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -14,15 +14,16 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class WindowController {
 	//JavaFX components
-	//mainWindow
-	@FXML ComboBox<String> carComboList = new ComboBox<String>(FXCollections.observableArrayList(Cars.carNames));
+	//mainWindow (FXML)
+	@FXML ComboBox<String> carComboList;
 	@FXML ImageView carImage;
 	@FXML TextField batteryTxtField;
 	@FXML Button enterButton;
@@ -32,7 +33,9 @@ public class WindowController {
 	@FXML ProgressBar batteryProgBar;
 	@FXML Button viewGraphBtn;
 	//graphWindow
-	@FXML ScatterChart<Integer, Integer> graph;
+	ScatterChart<Number, Number> graph;
+	NumberAxis xAxis = new NumberAxis(0, 100, 10);
+	NumberAxis yAxis = new NumberAxis(0, 100, 10);
 	//Cars List
 	private ArrayList<Cars> carList = new ArrayList<Cars>(Arrays.asList(new carData.BMWi3(), 
 					new carData.ChevroletBolt(), new carData.ChevroletSparkEV(), new carData.Fiat500e(), 
@@ -44,26 +47,36 @@ public class WindowController {
 	private double batteryPercent = 0.0;
 	private Cars selectedCar = carList.get(0);
 	
+	
+	//-----------------------EVENT DRIVEN METHODS:
+	
 	//When the open Graph Window Button
 	public void openGraphWindow(){
-		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("graphWindow.fxml"));
 			Stage stage = new Stage();
-			addDataPointsToGraph();
+			//Set the axis labels up
+			xAxis.setTickLabelsVisible(false);
+			yAxis.setLabel("Battery Percentage");
+			//Populate the graph
+			graph = new ScatterChart<Number, Number>(xAxis, yAxis, addDataPointsToGraph());
+			//Make graph pretty
+			graph.setTitle("Last 100 Battery Inputs of " + carComboList.getValue());
+			graph.setLegendVisible(false);
+			//Display the window
+			stage.setResizable(false);
 			stage.setTitle("Graph");
-			stage.setScene(new Scene(root));
+			stage.setScene(new Scene(graph, 400, 400));
 			stage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	//When enter button is pressed
 	public void enterButton(){
 		try{ //Make sure text is a number
-			batteryPercent = Double.parseDouble(batteryTxtField.getText());
+			double tempBatteryPercent = Double.parseDouble(batteryTxtField.getText());
+			if(tempBatteryPercent >= 0 && tempBatteryPercent <= 100)
+				batteryPercent = tempBatteryPercent;
 		}
 		catch(NumberFormatException ex){}
+		selectedCar.storeData((int)batteryPercent);
 		updateProgressBar();
 		updateLabels();
 	}
@@ -77,11 +90,27 @@ public class WindowController {
 			updateLabels();
 	}
 	
+	//Do things on key presses
+	public void onKeyPress(KeyEvent key){
+		if(key.getCode().equals(KeyCode.ENTER)){
+			enterButton();
+		}
+	}
 	
-	//HELPER METHODS:
+	
+	//-----------------HELPER METHODS:
 	
 	//Helper Method for enter button, make Progress Bar show current battery percentage
 	private void updateProgressBar(){
+		if(batteryPercent <= 25.0){
+			batteryProgBar.setStyle("-fx-accent: red;");
+		}
+		else if(batteryPercent <= 50.0){
+			batteryProgBar.setStyle("-fx-accent: yellow;");
+		}
+		else{
+			batteryProgBar.setStyle("-fx-accent: green;");
+		}
 		batteryProgBar.setProgress(batteryPercent/100.0);
 	}
 	
@@ -92,17 +121,25 @@ public class WindowController {
 	}
 	
 	//Helper method for Open Graph button, adds data to the graph
-	private void addDataPointsToGraph(){
-		XYChart.Series<Integer, Integer> series = new XYChart.Series<Integer, Integer>();
-		ArrayList<Integer> dataFromCar = selectedCar.getChargeList();
-		for(int x = 0; x < dataFromCar.size(); x++){
-			series.getData().set(x, new XYChart.Data<>(x, dataFromCar.get(x)));
+	@SuppressWarnings("unchecked")
+	private ObservableList<XYChart.Series<Number, Number>> addDataPointsToGraph(){
+		XYChart.Series<Number, Number> series = new XYChart.Series<>();
+		ArrayList<Integer> dataFromCar = selectedCar.getChargeList(); //Get Data
+		int x = 0;
+		if(dataFromCar.size() > 100){ //Only include last 100 data points
+			x += (dataFromCar.size() - 100);
 		}
-		graph.getData().add(series);
+		int y = 1; //x values of the chart
+		while(x < dataFromCar.size()){ //Add all data points to the series
+			series.getData().add(new XYChart.Data<Number, Number>(y, dataFromCar.get(x)));
+			x++;
+			y++;
+		}
+		return FXCollections.observableArrayList(series);
 	}
 	
 	
-	//STARTUP METHODS:
+	//---------------------------RUN ON STARTUP METHODS:
 	
 	//Setup to put car ArrayList in ComboBox at startup
 	public void populateComboBox(){
