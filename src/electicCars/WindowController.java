@@ -37,6 +37,7 @@ public class WindowController {
 	NumberAxis xAxis = new NumberAxis(0, 100, 10);
 	NumberAxis yAxis = new NumberAxis(0, 100, 10);
 	//Cars List
+	//8. ARRAYLIST and 9. GENERIC PROGRAMMING (UPCASTING)
 	private ArrayList<Cars> carList = new ArrayList<Cars>(Arrays.asList(new carData.BMWi3(), 
 					new carData.ChevroletBolt(), new carData.ChevroletSparkEV(), new carData.Fiat500e(), 
 					new carData.FordFocusElectric(), new carData.KiaSoulEV(), 
@@ -71,7 +72,7 @@ public class WindowController {
 	//When enter button is pressed
 	public void enterButton(){
 		try{ //Make sure text is a number
-			double tempBatteryPercent = Double.parseDouble(batteryTxtField.getText());
+			double tempBatteryPercent = Double.parseDouble(batteryTxtField.getText()); //10. WRAPPER CLASS
 			if(tempBatteryPercent >= 0 && tempBatteryPercent <= 100)
 				batteryPercent = tempBatteryPercent;
 		}
@@ -90,6 +91,7 @@ public class WindowController {
 			updateLabels();
 	}
 	
+	//3. EVENT HANDLER
 	//Do things on key presses
 	public void onKeyPress(KeyEvent key){
 		if(key.getCode().equals(KeyCode.ENTER)){
@@ -137,6 +139,7 @@ public class WindowController {
 	
 	//Helper method for Open Graph button, adds data to the graph
 	@SuppressWarnings("unchecked")
+	//11. GENERICS
 	private ObservableList<XYChart.Series<Number, Number>> addDataPointsToGraph(){
 		XYChart.Series<Number, Number> series = new XYChart.Series<>();
 		ArrayList<Integer> dataFromCar = selectedCar.getChargeList(); //Get Data

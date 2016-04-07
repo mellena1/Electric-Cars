@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//5. INHERITANCE
 public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 
 	private ArrayList<Integer> chargeData = new ArrayList<Integer>();
@@ -21,6 +22,7 @@ public class BMWi3 extends electicCars.Cars implements electicCars.Graphable{
 		loadData();
 	}
 	
+	//6. METHOD OVERRIDING
 	@Override
 	public void storeData(Integer powerLeft) {
 		chargeData.add(powerLeft);
